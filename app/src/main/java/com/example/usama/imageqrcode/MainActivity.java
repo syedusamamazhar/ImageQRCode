@@ -82,10 +82,12 @@ public class MainActivity extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView imageView = (ImageView) findViewById(R.id.imgView);
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
 
-            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+            ImageView imageView = (ImageView) findViewById(R.id.imgView);
+
+            //imageView bitmap must be set with using obj as it will recycle/dispose it afterwards
+            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
             GetImageAsync asyncCall = new GetImageAsync();
             asyncCall.setImg(bitmap);
